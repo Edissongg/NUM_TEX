@@ -14,12 +14,15 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.http import HttpResponse
 from django.contrib import admin
 from django.urls import path, include
 
+def api_home(request):
+    return HttpResponse("Bienvenido a la API_NAT. Use '/api/' para los endpoints disponibles.")
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('projects.urls')),  # Incluir las rutas de la app convertir
+    path('', api_home, name='api_home'),  # Vista para el endpoint raíz
+    path('api/', include('projects.urls')),  # Incluye las rutas de la app projects
 ]
-
-
